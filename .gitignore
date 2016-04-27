@@ -243,3 +243,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/ExternalSort/3
+/ExternalSort/4
+/ExternalSort/5
+/ExternalSort/6
+/ExternalSort/7

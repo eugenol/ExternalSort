@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	std::vector<std::string> filenames;
 
 	infile >> num_entries;
-	buffSize = 4;//(1024 / 2) / (sizeof(std::pair<int, int>)) / 4;
+	buffSize = (1024 / 2) / (sizeof(std::pair<int, int>)) / 4;
 
 	buffSize = buffSize > num_entries ? num_entries : buffSize;
 
@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 	for (auto i = 0; i < num_entries; i++)
 	{
 		infile >> buff[i%buffSize].first >> buff[i%buffSize].second;
-		if (i%buffSize == buffSize - 1)
+		if (i%buffSize == buffSize - 1 || i == num_entries-1)
 		{
 			std::sort(buff, buff + (i%buffSize)+1,
 				[](const std::pair<int, int> &a, const std::pair<int, int> &b)->bool
