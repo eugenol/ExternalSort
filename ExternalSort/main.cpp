@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	std::vector<std::string> filenames;
 
 	infile >> num_entries;
-	buffSize = (1024 / 2) / (sizeof(std::pair<int, int>))/4;
+	buffSize = 4;//(1024 / 2) / (sizeof(std::pair<int, int>)) / 4;
 
 	buffSize = buffSize > num_entries ? num_entries : buffSize;
 
@@ -43,9 +43,9 @@ int main(int argc, char **argv)
 			//filename = static_cast<std::ostringstream*>(&(std::ostringstream() << file_num))->str();
 			filename = std::to_string(file_num);
 			std::ofstream outfile(filename);
-			for (auto j = 0; j <= i; j++)
+			for (auto j = 0; j <= i%buffSize; j++)
 				outfile << buff[j].first << " " << buff[j].second << std::endl;
-			filename.push_back(filename.c_str);
+			filenames.push_back(filename);
 			file_num++;
 		}
 	}
