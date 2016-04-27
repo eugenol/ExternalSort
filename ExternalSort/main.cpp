@@ -2,14 +2,21 @@
 #include <fstream>
 #include <utility>
 #include <algorithm>
+#include <string>
+#include <sstream>
+#include <vector>
 
 
 int main(int argc, char **argv)
 {
 	long num_entries = 0;
+	long num_outfiles = 0;
+	long file_num = 1;
 	int a, b, buffSize;
 	std::pair<int, int> *buff = nullptr;
 	std::ifstream infile("land.txt");
+	std::string filename;
+	std::vector<std::string> filenames;
 
 	infile >> num_entries;
 	buffSize = (1024 / 2) / (sizeof(std::pair<int, int>))/4;
@@ -17,6 +24,8 @@ int main(int argc, char **argv)
 	buffSize = buffSize > num_entries ? num_entries : buffSize;
 
 	buff = new std::pair<int, int>[buffSize];
+
+	num_outfiles = num_entries / buffSize;
 
 	for (auto i = 0; i < num_entries; i++)
 	{
@@ -31,8 +40,13 @@ int main(int argc, char **argv)
 
 				return a.first < b.first;
 			});
-			//write buffer to file
-
+			//filename = static_cast<std::ostringstream*>(&(std::ostringstream() << file_num))->str();
+			filename = std::to_string(file_num);
+			std::ofstream outfile(filename);
+			for (auto j = 0; j <= i; j++)
+				outfile << buff[j].first << " " << buff[j].second << std::endl;
+			filename.push_back(filename.c_str);
+			file_num++;
 		}
 	}
 
