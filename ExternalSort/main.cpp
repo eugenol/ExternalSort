@@ -40,7 +40,7 @@ int split(int &buffSize, deque<string> &filenames)
 	string filename;
 
 	infile >> num_entries;
-	buffSize = (1024 / 2) / (sizeof(pair<int, int>)) / 4;
+	buffSize = (1024 / 2) / (sizeof(pair<int, int>));
 
 	buffSize = buffSize > num_entries ? num_entries : buffSize;
 
@@ -72,6 +72,8 @@ int split(int &buffSize, deque<string> &filenames)
 	}
 
 	delete[] buff;
+
+	buffSize /= 4;
 
 	return file_num;
 }
